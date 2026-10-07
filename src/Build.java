@@ -1,5 +1,5 @@
-import java.util.LinkedList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,14 +27,13 @@ public class Build {
     //Workzone
     if(vertex == null) return "";
     List<Vertex> traveled = new LinkedList<>();
-    longestWord(vertex, traveled);
-    
+    return longestWord(vertex, traveled);
   }
 
-  private static String longestWord(Vertex<String> vertex, List<String> traveled){
-    if(vertex == null) return "";
+  private static String longestWord(Vertex<String> vertex, List<Vertex> traveled){
+    if(vertex == null || traveled.contains(vertex)) return "";
     String longest = vertex.data;
-
+    traveled.add(vertex);
     for(Vertex<String> n : vertex.neighbors){
       String check = longestWord(n);
       if(check.length() > longest.length()) longest = check;
