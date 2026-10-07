@@ -1,3 +1,4 @@
+import java.util.LinkedList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,23 @@ public class Build {
    * @return the longest reachable word, or an empty string if the vertex is null
    */
   public static String longestWord(Vertex<String> vertex) {
-    return "";
+    //Workzone
+    if(vertex == null) return "";
+    List<Vertex> traveled = new LinkedList<>();
+    longestWord(vertex, traveled);
+    
+  }
+
+  private static String longestWord(Vertex<String> vertex, List<String> traveled){
+    if(vertex == null) return "";
+    String longest = vertex.data;
+
+    for(Vertex<String> n : vertex.neighbors){
+      String check = longestWord(n);
+      if(check.length() > longest.length()) longest = check;
+    }
+    //Workzone End
+    return longest;
   }
 
   /**
