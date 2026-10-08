@@ -75,6 +75,21 @@ public class Build {
    * @return true if the destination is reachable from the start, false otherwise
    */
   public static boolean canReach(Airport start, Airport destination) {
+    if(start == null || destination == null) return false;
+    if(start == destination) return true;
+    List<Airport> hist = new LinkedList<>();
+    for(Airport n : start.getOutboundFlights()){
+      if(canReach(n, destination, hist) == true) return true;
+    }
+    return false;
+  }
+  public static boolean canReach(Airport start, Airport destination, List<Airport> history) {
+    if(start == null || destination == null || history.contains(start)) return false;
+    if(start == destination) return true;
+    history.add(start);
+    for(Airport n : start.getOutboundFlights()){
+      if(canReach(n, destination, history)) return true;
+    }
     return false;
   }
 
