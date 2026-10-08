@@ -50,6 +50,20 @@ public class Build {
    * @param <T> the type of values stored in the vertices
    */
   public static <T> void printSelfLoopers(Vertex<T> vertex) {
+    if(vertex == null) return;
+    List<Vertex> a = new LinkedList<>();
+    printSelfLoopers(vertex, a);
+  }
+  public static <T> void printSelfLoopers(Vertex<T> vertex, List<Vertex> traveled) {
+    if(vertex == null) return;
+    if(traveled.contains(vertex)){
+      System.out.println(vertex.data);
+      return;
+    }
+    traveled.add(vertex);
+    for (Vertex n : vertex.neighbors) {
+        printSelfLoopers(n, traveled);
+    }
   }
 
   /**
