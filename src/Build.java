@@ -35,7 +35,7 @@ public class Build {
     String longest = vertex.data;
     traveled.add(vertex);
     for(Vertex<String> n : vertex.neighbors){
-      String check = longestWord(n);
+      String check = longestWord(n, traveled);
       if(check.length() > longest.length()) longest = check;
     }
     //Workzone End
